@@ -19,7 +19,7 @@
 
     <header class="absolute top-0 left-0 right-0 z-50">
         <nav class="container mx-auto px-6 py-5 flex justify-between items-center">
-            <a href="/" class="text-xl font-bold text-white tracking-tight">JriDev</a>
+            <a href="/" class="text-xl font-bold text-white tracking-tight">JriDev.</a>
             <div class="hidden md:flex items-center space-x-10">
                 <a href="#portfolio" class="text-sm font-medium text-slate-200 hover:text-white transition-colors">Portfolio</a>
                 <a href="#about" class="text-sm font-medium text-slate-200 hover:text-white transition-colors">About</a>
