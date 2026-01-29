@@ -26,6 +26,16 @@
                         <p class="font-normal text-gray-700 dark:text-gray-400">Update your bio, title, and profile
                             picture.</p>
                     </a>
+
+                    <!-- Certificates Card -->
+                    <a href="{{ route('admin.certificates.index') }}"
+                        class="block p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Manage
+                            Certificates
+                        </h5>
+                        <p class="font-normal text-gray-700 dark:text-gray-400">Add, edit, or delete your professional
+                            certificates.</p>
+                    </a>
                 </div>
             </div>
         </div>

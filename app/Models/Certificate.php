@@ -5,17 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class About extends Model
+class Certificate extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'page_title',
         'title',
-        'description',
+        'issuer',
+        'issued_at',
         'image',
-        'hero_title',
-        'hero_description',
-        'logo_text',
+        'credential_url',
+    ];
+
+    protected $casts = [
+        'issued_at' => 'date',
     ];
 }

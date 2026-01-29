@@ -27,14 +27,22 @@ class AboutController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
+            'page_title' => 'nullable|string|max:255',
+            'hero_title' => 'nullable|string|max:255',
+            'hero_description' => 'nullable|string',
+            'logo_text' => 'nullable|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $about = About::first();
 
         $data = [
+            'page_title' => $request->page_title,
             'title' => $request->title,
             'description' => $request->description,
+            'hero_title' => $request->hero_title,
+            'hero_description' => $request->hero_description,
+            'logo_text' => $request->logo_text,
         ];
 
         if ($request->hasFile('image')) {

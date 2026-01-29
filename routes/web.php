@@ -7,7 +7,9 @@ use App\Models\Portfolio;
 // Halaman utama (Publik)
 Route::get('/', function () {
     $portfolios = Portfolio::latest()->get();
-    return view('welcome', compact('portfolios'));
+    $certificates = \App\Models\Certificate::latest('issued_at')->get();
+    $about = \App\Models\About::first();
+    return view('welcome', compact('portfolios', 'certificates', 'about'));
 });
 
 // Rute ini menangani redirect setelah login
@@ -20,6 +22,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     // Rute CRUD untuk portofolio
     // URL akan menjadi /admin/portfolios, /admin/portfolios/create, dll.
     Route::resource('portfolios', PortfolioController::class);
+    Route::resource('certificates', \App\Http\Controllers\Admin\CertificateController::class);
 
     // Rute untuk About Me (singleton)
     Route::get('about', [App\Http\Controllers\Admin\AboutController::class, 'index'])->name('about.index');

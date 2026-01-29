@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>JriDev — Web Developer & Designer</title>
+    <title>{{ $about->page_title ?? 'JriDev — Web Developer & Designer' }}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,7 +28,7 @@
 
     <header class="absolute top-0 left-0 right-0 z-50">
         <nav class="container mx-auto px-6 py-5 flex justify-between items-center">
-            <a href="/" class="text-xl font-bold text-white tracking-tight">JriDev.</a>
+            <a href="/" class="text-xl font-bold text-white tracking-tight">{{ $about->logo_text ?? 'JriDev.' }}</a>
             <div class="hidden md:flex items-center space-x-10">
                 <a href="#portfolio"
                     class="text-sm font-medium text-slate-200 hover:text-white transition-colors">Portfolio</a>
@@ -58,12 +58,11 @@
 
             <div class="relative z-20 px-6">
                 <h1 class="font-serif text-5xl md:text-7xl font-bold text-white">
-                    Crafting Digital Experiences.
+                    {{ $about->hero_title ?? 'Crafting Digital Experiences.' }}
                 </h1>
 
                 <p class="mt-6 text-lg text-slate-300 max-w-2xl mx-auto">
-                    Saya adalah seorang web developer yang berfokus pada pengembangan aplikasi yang fungsional,
-                    intuitif, dan memiliki desain yang bersih.
+                    {{ $about->hero_description ?? 'Saya adalah seorang web developer yang berfokus pada pengembangan aplikasi yang fungsional, intuitif, dan memiliki desain yang bersih.' }}
                 </p>
                 <a href="#portfolio"
                     class="inline-block mt-8 px-8 py-3 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 transition-transform hover:scale-105 shadow-lg shadow-blue-500/20">
@@ -103,9 +102,6 @@
                 <div class="text-center mb-16">
                     <h2 class="font-serif text-4xl font-bold text-slate-900">Filosofi Kerja Saya</h2>
                 </div>
-                @php
-                    $about = \App\Models\About::first();
-                @endphp
 
                 <div class="flex flex-col md:flex-row items-center gap-12 mb-20">
                     <div class="w-full md:w-1/3">
@@ -170,6 +166,46 @@
                 </div>
             </div>
         </section>
+
+        <section id="certificates" class="bg-slate-50 py-20 md:py-28">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="font-serif text-4xl font-bold text-slate-900">Sertifikat</h2>
+                    <p class="mt-3 text-slate-500">Pengakuan profesional dan kompetensi yang telah saya raih.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    @forelse ($certificates as $certificate)
+                        <div
+                            class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow border border-slate-100">
+                            @if($certificate->image)
+                                <img src="{{ $certificate->image }}" alt="{{ $certificate->title }}"
+                                    class="w-full h-40 object-cover rounded-lg mb-4 bg-slate-100">
+                            @else
+                                <div
+                                    class="w-full h-40 bg-slate-100 rounded-lg mb-4 flex items-center justify-center text-slate-400">
+                                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            @endif
+                            <h3 class="font-bold text-lg text-slate-900">{{ $certificate->title }}</h3>
+                            <p class="text-slate-500 text-sm">{{ $certificate->issuer }} &bull;
+                                {{ $certificate->issued_at->format('M Y') }}
+                            </p>
+                            @if($certificate->credential_url)
+                                <a href="{{ $certificate->credential_url }}" target="_blank"
+                                    class="inline-block mt-4 text-blue-600 text-sm font-medium hover:underline">Lihat Kredensial
+                                    &rarr;</a>
+                            @endif
+                        </div>
+                    @empty
+                        <p class="col-span-full text-center text-slate-500">Belum ada sertifikat.</p>
+                    @endforelse
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer id="contact" class="bg-slate-100 border-t border-slate-200">
@@ -197,13 +233,6 @@
                     <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
                         <path
                             d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                    </svg>
-                </a>
-                <a href="https://discord.com/users/fajriag" target="_blank"
-                    class="text-slate-500 hover:text-slate-900 transition-colors" aria-label="Discord">
-                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 28 28">
-                        <path
-                            d="M23.021 3.445H4.978A2.036 2.036 0 0 0 3 5.48v17.04a2.036 2.036 0 0 0 2.021 2.035h14.392l-.634-2.215a.678.678 0 0 1 .134-.72l1.634-1.634a.678.678 0 0 1 .961 0l1.634 1.634a.678.678 0 0 1 .134.72l-.634 2.215h3.359a2.036 2.036 0 0 0 2.021-2.035V5.48a2.036 2.036 0 0 0-2.021-2.035zM9.49 18.299c-1.01 0-1.828-.86-1.828-1.921s.818-1.92 1.828-1.92c1.01 0 1.828.86 1.828 1.92s-.818 1.92-1.828 1.92zm9.02 0c-1.01 0-1.828-.86-1.828-1.921s.818-1.92 1.828-1.92c1.01 0 1.828.86 1.828 1.92s-.818 1.92-1.828 1.92z" />
                     </svg>
                 </a>
             </div>
