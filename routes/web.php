@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\PortfolioController;
 use App\Models\Portfolio;
+use Illuminate\Support\Facades\App;
 
 // Halaman utama (Publik)
 Route::get('/', function () {
@@ -11,6 +12,14 @@ Route::get('/', function () {
     $about = \App\Models\About::first();
     return view('welcome', compact('portfolios', 'certificates', 'about'));
 });
+
+// Route for changing language
+Route::get('locale/{lang}', function ($lang) {
+    if (in_array($lang, ['en', 'id', 'ja'])) {
+        session(['locale' => $lang]);
+    }
+    return back();
+})->name('set_locale');
 
 // Rute ini menangani redirect setelah login
 Route::get('/dashboard', function () {
@@ -25,8 +34,8 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::resource('certificates', \App\Http\Controllers\Admin\CertificateController::class);
 
     // Rute untuk About Me (singleton)
-    Route::get('about', [App\Http\Controllers\Admin\AboutController::class, 'index'])->name('about.index');
-    Route::put('about', [App\Http\Controllers\Admin\AboutController::class, 'update'])->name('about.update');
+    Route::get('about', [\App\Http\Controllers\Admin\AboutController::class, 'index'])->name('about.index');
+    Route::put('about', [\App\Http\Controllers\Admin\AboutController::class, 'update'])->name('about.update');
 });
 
 require __DIR__ . '/auth.php';

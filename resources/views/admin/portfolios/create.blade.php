@@ -21,27 +21,48 @@
 
                     <form action="{{ route('admin.portfolios.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <div class="mb-4">
-                            <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Judul:</label>
-                            <input type="text" name="title" id="title" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{ old('title') }}" required>
+
+                        <!-- English Content (Default) -->
+                        <div class="space-y-4">
+                            <div class="mb-4">
+                                <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Ref:</label>
+                                <input type="text" name="title" id="title"
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    value="{{ old('title') }}" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="description"
+                                    class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
+                                <textarea name="description" id="description" rows="5"
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    required>{{ old('description') }}</textarea>
+                            </div>
                         </div>
-                        <div class="mb-4">
-                            <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Deskripsi:</label>
-                            <textarea name="description" id="description" rows="5" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>{{ old('description') }}</textarea>
+
+                        <!-- Common Fields -->
+                        <div class="mt-6 pt-4 border-t border-gray-200">
+                            <div class="mb-4">
+                                <label for="link" class="block text-gray-700 text-sm font-bold mb-2">Link
+                                    (Opsional):</label>
+                                <input type="url" name="link" id="link"
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    value="{{ old('link') }}">
+                            </div>
+                            <div class="mb-4">
+                                <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Gambar:</label>
+                                <input type="file" name="image" id="image"
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    required>
+                            </div>
                         </div>
-                        <div class="mb-4">
-                            <label for="link" class="block text-gray-700 text-sm font-bold mb-2">Link (Opsional):</label>
-                            <input type="url" name="link" id="link" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{ old('link') }}">
-                        </div>
-                        <div class="mb-4">
-                            <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Gambar:</label>
-                            <input type="file" name="image" id="image" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+
+                        <div class="flex items-center justify-between mt-6">
+                            <button type="submit"
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                                 Simpan
                             </button>
-                            <a href="{{ route('admin.portfolios.index') }}" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
+                            <a href="{{ route('admin.portfolios.index') }}"
+                                class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
                                 Batal
                             </a>
                         </div>

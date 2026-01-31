@@ -24,7 +24,11 @@ class CertificateController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'title_id' => 'nullable|string|max:255',
+            'title_ja' => 'nullable|string|max:255',
             'issuer' => 'required|string|max:255',
+            'issuer_id' => 'nullable|string|max:255',
+            'issuer_ja' => 'nullable|string|max:255',
             'issued_at' => 'required|date',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'credential_url' => 'nullable|url',
@@ -36,6 +40,25 @@ class CertificateController extends Controller
             $data['image'] = $request->file('image')->store('certificates', 'public');
             // Add full URL access for easy display if using default storage link
             $data['image'] = Storage::url($data['image']);
+        }
+
+        // Auto-translation Logic
+        try {
+            $tr = new \Stichoza\GoogleTranslate\GoogleTranslate();
+            $tr->setSource('en');
+
+            // Translate to Indonesian
+            $tr->setTarget('id');
+            $data['title_id'] = $tr->translate($request->title);
+            $data['issuer_id'] = $tr->translate($request->issuer);
+
+            // Translate to Japanese
+            $tr->setTarget('ja');
+            $data['title_ja'] = $tr->translate($request->title);
+            $data['issuer_ja'] = $tr->translate($request->issuer);
+
+        } catch (\Exception $e) {
+            // Silent fail
         }
 
         Certificate::create($data);
@@ -53,7 +76,11 @@ class CertificateController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'title_id' => 'nullable|string|max:255',
+            'title_ja' => 'nullable|string|max:255',
             'issuer' => 'required|string|max:255',
+            'issuer_id' => 'nullable|string|max:255',
+            'issuer_ja' => 'nullable|string|max:255',
             'issued_at' => 'required|date',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'credential_url' => 'nullable|url',
@@ -70,6 +97,25 @@ class CertificateController extends Controller
             }
             $path = $request->file('image')->store('certificates', 'public');
             $data['image'] = Storage::url($path);
+        }
+
+        // Auto-translation Logic
+        try {
+            $tr = new \Stichoza\GoogleTranslate\GoogleTranslate();
+            $tr->setSource('en');
+
+            // Translate to Indonesian
+            $tr->setTarget('id');
+            $data['title_id'] = $tr->translate($request->title);
+            $data['issuer_id'] = $tr->translate($request->issuer);
+
+            // Translate to Japanese
+            $tr->setTarget('ja');
+            $data['title_ja'] = $tr->translate($request->title);
+            $data['issuer_ja'] = $tr->translate($request->issuer);
+
+        } catch (\Exception $e) {
+            // Silent fail
         }
 
         $certificate->update($data);

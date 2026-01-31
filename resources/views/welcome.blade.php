@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $about->page_title ?? 'JriDev — Web Developer & Designer' }}</title>
+    <title>{{ $about ? $about->translate('page_title') : 'JriDev — Web Developer & Designer' }}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,23 +26,49 @@
 
 <body class="font-sans antialiased bg-slate-50 text-slate-700">
 
+    <!-- DEBUG INFO -->
+    @if(app()->isLocal())
+        <div class="bg-red-500 text-white p-4 fixed bottom-0 left-0 z-[100] w-full text-xs">
+            <p><strong>Current Locale:</strong> {{ app()->getLocale() }}</p>
+            <p><strong>Session Locale:</strong> {{ session('locale') }}</p>
+            @if($about)
+                <p><strong>DB ID:</strong> {{ $about->id }}</p>
+                <p><strong>About Hero Title (EN):</strong> {{ $about->hero_title }}</p>
+                <p><strong>About Hero Title (ID):</strong> {{ $about->hero_title_id }}</p>
+                <p><strong>About Hero Title (JA):</strong> {{ $about->hero_title_ja }}</p>
+            @else
+                <p>No About data found.</p>
+            @endif
+        </div>
+    @endif
+
     <header class="absolute top-0 left-0 right-0 z-50">
         <nav class="container mx-auto px-6 py-5 flex justify-between items-center">
             <a href="/" class="text-xl font-bold text-white tracking-tight">{{ $about->logo_text ?? 'JriDev.' }}</a>
             <div class="hidden md:flex items-center space-x-10">
                 <a href="#portfolio"
-                    class="text-sm font-medium text-slate-200 hover:text-white transition-colors">Portfolio</a>
-                <a href="#about" class="text-sm font-medium text-slate-200 hover:text-white transition-colors">About</a>
+                    class="text-sm font-medium text-slate-200 hover:text-white transition-colors">{{ __('Portfolio') }}</a>
+                <a href="#about"
+                    class="text-sm font-medium text-slate-200 hover:text-white transition-colors">{{ __('About Me') }}</a>
                 <a href="#contact"
-                    class="text-sm font-medium text-slate-200 hover:text-white transition-colors">Contact</a>
+                    class="text-sm font-medium text-slate-200 hover:text-white transition-colors">{{ __('Contact') }}</a>
+
+                <!-- Language Switcher -->
+                <div class="flex items-center space-x-2">
+                    <a href="{{ route('set_locale', 'en') }}"
+                        class="px-2 py-1 text-xs font-bold rounded {{ app()->getLocale() == 'en' ? 'bg-white text-slate-900' : 'text-slate-300 border border-slate-600 hover:bg-slate-800' }} transition-colors">EN</a>
+                    <a href="{{ route('set_locale', 'id') }}"
+                        class="px-2 py-1 text-xs font-bold rounded {{ app()->getLocale() == 'id' ? 'bg-white text-slate-900' : 'text-slate-300 border border-slate-600 hover:bg-slate-800' }} transition-colors">ID</a>
+                    <a href="{{ route('set_locale', 'ja') }}"
+                        class="px-2 py-1 text-xs font-bold rounded {{ app()->getLocale() == 'ja' ? 'bg-white text-slate-900' : 'text-slate-300 border border-slate-600 hover:bg-slate-800' }} transition-colors">JP</a>
+                </div>
             </div>
             @auth
                 <a href="{{ url('/admin/portfolios') }}"
-                    class="hidden md:block px-5 py-2 text-sm bg-white text-slate-900 font-medium rounded-full hover:bg-slate-200 transition-colors">Dashboard</a>
+                    class="hidden md:block px-5 py-2 text-sm bg-white text-slate-900 font-medium rounded-full hover:bg-slate-200 transition-colors">{{ __('Dashboard') }}</a>
             @else
                 <a href="{{ route('login') }}"
-                    class="hidden md:block px-5 py-2 text-sm bg-white text-slate-900 font-medium rounded-full hover:bg-slate-200 transition-colors">Log
-                    In</a>
+                    class="hidden md:block px-5 py-2 text-sm bg-white text-slate-900 font-medium rounded-full hover:bg-slate-200 transition-colors">{{ __('Log  In') }}</a>
             @endauth
         </nav>
     </header>
@@ -58,15 +84,15 @@
 
             <div class="relative z-20 px-6">
                 <h1 class="font-serif text-5xl md:text-7xl font-bold text-white">
-                    {{ $about->hero_title ?? 'Crafting Digital Experiences.' }}
+                    {{ $about ? $about->translate('hero_title') : __('Crafting Digital Experiences.') }}
                 </h1>
 
                 <p class="mt-6 text-lg text-slate-300 max-w-2xl mx-auto">
-                    {{ $about->hero_description ?? 'Saya adalah seorang web developer yang berfokus pada pengembangan aplikasi yang fungsional, intuitif, dan memiliki desain yang bersih.' }}
+                    {{ $about ? $about->translate('hero_description') : __('I am a web developer focused on developing functional, intuitive, and clean design applications.') }}
                 </p>
                 <a href="#portfolio"
                     class="inline-block mt-8 px-8 py-3 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 transition-transform hover:scale-105 shadow-lg shadow-blue-500/20">
-                    Lihat Karya Saya
+                    {{ __('View My Work') }}
                 </a>
             </div>
         </section>
@@ -74,8 +100,8 @@
         <section id="portfolio" class="bg-white py-20 md:py-28">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
-                    <h2 class="font-serif text-4xl font-bold text-slate-900">Portfolio</h2>
-                    <p class="mt-3 text-slate-500">Proyek-proyek pilihan yang merepresentasikan keahlian saya.</p>
+                    <h2 class="font-serif text-4xl font-bold text-slate-900">{{ __('Portfolio') }}</h2>
+                    <p class="mt-3 text-slate-500">{{ __('Selected projects that represent my skills.') }}</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     @forelse ($portfolios as $portfolio)
@@ -83,15 +109,17 @@
                             <div
                                 class="rounded-2xl overflow-hidden border border-slate-200 shadow-sm group-hover:shadow-xl transition-all duration-300">
                                 <img class="w-full h-56 object-cover" src="{{ asset('storage/' . $portfolio->image) }}"
-                                    alt="{{ $portfolio->title }}">
+                                    alt="{{ $portfolio->translate('title') }}">
                             </div>
                             <div class="p-4">
-                                <h3 class="font-bold text-lg text-slate-900">{{ $portfolio->title }}</h3>
-                                <p class="text-slate-500 text-sm mt-1">{{ Str::limit($portfolio->description, 80) }}</p>
+                                <h3 class="font-bold text-lg text-slate-900">{{ $portfolio->translate('title') }}</h3>
+                                <p class="text-slate-500 text-sm mt-1">
+                                    {{ Str::limit($portfolio->translate('description'), 80) }}
+                                </p>
                             </div>
                         </a>
                     @empty
-                        <p class="col-span-full text-center text-slate-500">Belum ada proyek untuk ditampilkan.</p>
+                        <p class="col-span-full text-center text-slate-500">{{ __('No projects to display yet.') }}</p>
                     @endforelse
                 </div>
             </div>
@@ -100,7 +128,7 @@
         <section id="about" class="py-20 md:py-28">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
-                    <h2 class="font-serif text-4xl font-bold text-slate-900">Filosofi Kerja Saya</h2>
+                    <h2 class="font-serif text-4xl font-bold text-slate-900">{{ __('My Work Philosophy') }}</h2>
                 </div>
 
                 <div class="flex flex-col md:flex-row items-center gap-12 mb-20">
@@ -115,10 +143,10 @@
                     </div>
                     <div class="w-full md:w-2/3 text-left">
                         <h3 class="font-serif text-2xl font-bold text-slate-900 mb-4">
-                            {{ $about->title ?? 'Halo, saya JriDev.' }}
+                            {{ $about ? $about->translate('title') : __('Hello, I\'m JriDev.') }}
                         </h3>
                         <div class="text-slate-600 leading-relaxed text-lg mb-6 whitespace-pre-line">
-                            {{ $about->description ?? 'Deskripsi default.' }}
+                            {{ $about ? $about->translate('description') : __('Default description.') }}
                         </div>
                     </div>
                 </div>
@@ -133,9 +161,8 @@
                                     d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
                             </svg>
                         </div>
-                        <h3 class="font-bold text-xl text-slate-900">Struktur Kode</h3>
-                        <p class="text-slate-500 mt-2">Menulis kode yang bersih, terstruktur, dan mudah dikelola untuk
-                            skalabilitas jangka panjang.</p>
+                        <h3 class="font-bold text-xl text-slate-900">{{ __('Code Structure') }}</h3>
+                        <p class="text-slate-500 mt-2">{{ __('Writing clean code...') }}</p>
                     </div>
                     <div>
                         <div
@@ -146,9 +173,8 @@
                                     d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z" />
                             </svg>
                         </div>
-                        <h3 class="font-bold text-xl text-slate-900">Desain Intuitif</h3>
-                        <p class="text-slate-500 mt-2">Merancang antarmuka yang tidak hanya indah, tetapi juga mudah
-                            digunakan oleh semua kalangan.</p>
+                        <h3 class="font-bold text-xl text-slate-900">{{ __('Intuitive Design') }}</h3>
+                        <p class="text-slate-500 mt-2">{{ __('Designing interfaces...') }}</p>
                     </div>
                     <div>
                         <div
@@ -159,9 +185,8 @@
                                     d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
                             </svg>
                         </div>
-                        <h3 class="font-bold text-xl text-slate-900">Performa Cepat</h3>
-                        <p class="text-slate-500 mt-2">Mengoptimalkan setiap aspek aplikasi untuk memastikan waktu muat
-                            yang cepat dan responsif.</p>
+                        <h3 class="font-bold text-xl text-slate-900">{{ __('Fast Performance') }}</h3>
+                        <p class="text-slate-500 mt-2">{{ __('Optimizing every aspect...') }}</p>
                     </div>
                 </div>
             </div>
@@ -170,15 +195,15 @@
         <section id="certificates" class="bg-slate-50 py-20 md:py-28">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
-                    <h2 class="font-serif text-4xl font-bold text-slate-900">Sertifikat</h2>
-                    <p class="mt-3 text-slate-500">Pengakuan profesional dan kompetensi yang telah saya raih.</p>
+                    <h2 class="font-serif text-4xl font-bold text-slate-900">{{ __('Certificates') }}</h2>
+                    <p class="mt-3 text-slate-500">{{ __('Professional recognition...') }}</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     @forelse ($certificates as $certificate)
                         <div
                             class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow border border-slate-100">
                             @if($certificate->image)
-                                <img src="{{ $certificate->image }}" alt="{{ $certificate->title }}"
+                                <img src="{{ $certificate->image }}" alt="{{ $certificate->translate('title') }}"
                                     class="w-full h-40 object-cover rounded-lg mb-4 bg-slate-100">
                             @else
                                 <div
@@ -190,18 +215,18 @@
                                     </svg>
                                 </div>
                             @endif
-                            <h3 class="font-bold text-lg text-slate-900">{{ $certificate->title }}</h3>
-                            <p class="text-slate-500 text-sm">{{ $certificate->issuer }} &bull;
+                            <h3 class="font-bold text-lg text-slate-900">{{ $certificate->translate('title') }}</h3>
+                            <p class="text-slate-500 text-sm">{{ $certificate->translate('issuer') }} &bull;
                                 {{ $certificate->issued_at->format('M Y') }}
                             </p>
                             @if($certificate->credential_url)
                                 <a href="{{ $certificate->credential_url }}" target="_blank"
-                                    class="inline-block mt-4 text-blue-600 text-sm font-medium hover:underline">Lihat Kredensial
+                                    class="inline-block mt-4 text-blue-600 text-sm font-medium hover:underline">{{ __('View Credential') }}
                                     &rarr;</a>
                             @endif
                         </div>
                     @empty
-                        <p class="col-span-full text-center text-slate-500">Belum ada sertifikat.</p>
+                        <p class="col-span-full text-center text-slate-500">{{ __('No certificates yet.') }}</p>
                     @endforelse
                 </div>
             </div>
@@ -210,9 +235,8 @@
 
     <footer id="contact" class="bg-slate-100 border-t border-slate-200">
         <div class="container mx-auto px-6 py-16 text-center">
-            <h2 class="font-serif text-3xl font-bold text-slate-900">Mari Berkolaborasi</h2>
-            <p class="mt-3 text-slate-500 max-w-lg mx-auto">Punya ide atau proyek yang ingin Anda wujudkan? Saya siap
-                membantu.</p>
+            <h2 class="font-serif text-3xl font-bold text-slate-900">{{ __('Let\'s Collaborate') }}</h2>
+            <p class="mt-3 text-slate-500 max-w-lg mx-auto">{{ __('Have an idea or project...') }}</p>
 
             <a href="mailto:jridev2@gmail.com"
                 class="inline-block mt-8 text-lg text-blue-600 font-semibold hover:underline">

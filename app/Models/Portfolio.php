@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Portfolio extends Model
 {
-    use HasFactory;
+    use HasFactory, \App\Traits\Translatable;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +16,11 @@ class Portfolio extends Model
      */
     protected $fillable = [
         'title',
+        'title_id',
+        'title_ja',
         'description',
+        'description_id',
+        'description_ja',
         'image',
         'link',
     ];

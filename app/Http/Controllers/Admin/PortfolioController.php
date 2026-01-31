@@ -28,7 +28,11 @@ class PortfolioController extends Controller
         // Validasi form
         $validated = $request->validate([
             'title' => 'required|string|max:255',
+            'title_id' => 'nullable|string|max:255',
+            'title_ja' => 'nullable|string|max:255',
             'description' => 'required|string',
+            'description_id' => 'nullable|string',
+            'description_ja' => 'nullable|string',
             'link' => 'nullable|url',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -36,6 +40,25 @@ class PortfolioController extends Controller
         // Upload gambar dan dapatkan path
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->store('portfolio_images', 'public');
+        }
+
+        // Auto-translation Logic
+        try {
+            $tr = new \Stichoza\GoogleTranslate\GoogleTranslate();
+            $tr->setSource('en');
+
+            // Translate to Indonesian
+            $tr->setTarget('id');
+            $validated['title_id'] = $tr->translate($request->title);
+            $validated['description_id'] = $tr->translate($request->description);
+
+            // Translate to Japanese
+            $tr->setTarget('ja');
+            $validated['title_ja'] = $tr->translate($request->title);
+            $validated['description_ja'] = $tr->translate($request->description);
+
+        } catch (\Exception $e) {
+            // Silent fail
         }
 
         Portfolio::create($validated);
@@ -54,7 +77,11 @@ class PortfolioController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
+            'title_id' => 'nullable|string|max:255',
+            'title_ja' => 'nullable|string|max:255',
             'description' => 'required|string',
+            'description_id' => 'nullable|string',
+            'description_ja' => 'nullable|string',
             'link' => 'nullable|url',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -67,6 +94,25 @@ class PortfolioController extends Controller
             }
             // Upload gambar baru
             $validated['image'] = $request->file('image')->store('portfolio_images', 'public');
+        }
+
+        // Auto-translation Logic
+        try {
+            $tr = new \Stichoza\GoogleTranslate\GoogleTranslate();
+            $tr->setSource('en');
+
+            // Translate to Indonesian
+            $tr->setTarget('id');
+            $validated['title_id'] = $tr->translate($request->title);
+            $validated['description_id'] = $tr->translate($request->description);
+
+            // Translate to Japanese
+            $tr->setTarget('ja');
+            $validated['title_ja'] = $tr->translate($request->title);
+            $validated['description_ja'] = $tr->translate($request->description);
+
+        } catch (\Exception $e) {
+            // Silent fail
         }
 
         $portfolio->update($validated);
