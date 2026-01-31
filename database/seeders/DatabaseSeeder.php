@@ -15,11 +15,16 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Membuat satu user admin yang akan kita gunakan untuk login
-        User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('password'), // default password adalah 'password'
-        ]);
+        // Membuat satu user admin yang akan kita gunakan untuk login
+        // Membuat satu user admin yang akan kita gunakan untuk login
+        User::updateOrCreate(
+            ['email' => 'admin@example.com'],
+            [
+                'name' => 'Admin',
+                'password' => Hash::make('password'), // default password adalah 'password'
+                'email_verified_at' => now(),
+            ]
+        );
 
         // Memanggil seeder lain untuk mengisi data portofolio
         $this->call([
