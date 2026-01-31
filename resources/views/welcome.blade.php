@@ -27,20 +27,7 @@
 <body class="font-sans antialiased bg-slate-50 text-slate-700">
 
     <!-- DEBUG INFO -->
-    @if(app()->isLocal())
-        <div class="bg-red-500 text-white p-4 fixed bottom-0 left-0 z-[100] w-full text-xs">
-            <p><strong>Current Locale:</strong> {{ app()->getLocale() }}</p>
-            <p><strong>Session Locale:</strong> {{ session('locale') }}</p>
-            @if($about)
-                <p><strong>DB ID:</strong> {{ $about->id }}</p>
-                <p><strong>About Hero Title (EN):</strong> {{ $about->hero_title }}</p>
-                <p><strong>About Hero Title (ID):</strong> {{ $about->hero_title_id }}</p>
-                <p><strong>About Hero Title (JA):</strong> {{ $about->hero_title_ja }}</p>
-            @else
-                <p>No About data found.</p>
-            @endif
-        </div>
-    @endif
+
 
     <header class="absolute top-0 left-0 right-0 z-50">
         <nav class="container mx-auto px-6 py-5 flex justify-between items-center">
@@ -54,13 +41,32 @@
                     class="text-sm font-medium text-slate-200 hover:text-white transition-colors">{{ __('Contact') }}</a>
 
                 <!-- Language Switcher -->
-                <div class="flex items-center space-x-2">
-                    <a href="{{ route('set_locale', 'en') }}"
-                        class="px-2 py-1 text-xs font-bold rounded {{ app()->getLocale() == 'en' ? 'bg-white text-slate-900' : 'text-slate-300 border border-slate-600 hover:bg-slate-800' }} transition-colors">EN</a>
-                    <a href="{{ route('set_locale', 'id') }}"
-                        class="px-2 py-1 text-xs font-bold rounded {{ app()->getLocale() == 'id' ? 'bg-white text-slate-900' : 'text-slate-300 border border-slate-600 hover:bg-slate-800' }} transition-colors">ID</a>
-                    <a href="{{ route('set_locale', 'ja') }}"
-                        class="px-2 py-1 text-xs font-bold rounded {{ app()->getLocale() == 'ja' ? 'bg-white text-slate-900' : 'text-slate-300 border border-slate-600 hover:bg-slate-800' }} transition-colors">JP</a>
+                <!-- Language Switcher Dropdown -->
+                <div class="relative" x-data="{ open: false }">
+                    <button @click="open = !open" @click.outside="open = false"
+                        class="flex items-center space-x-1 text-slate-200 hover:text-white text-sm font-medium transition-colors focus:outline-none">
+                        <span class="uppercase">{{ app()->getLocale() == 'ja' ? 'JP' : app()->getLocale() }}</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+
+                    <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                        x-transition:enter-start="transform opacity-0 scale-95"
+                        x-transition:enter-end="transform opacity-100 scale-100"
+                        x-transition:leave="transition ease-in duration-75"
+                        x-transition:leave-start="transform opacity-100 scale-100"
+                        x-transition:leave-end="transform opacity-0 scale-95"
+                        class="absolute right-0 mt-2 w-20 bg-white rounded-md shadow-lg py-1 z-50">
+                        <a href="{{ route('set_locale', 'en') }}"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {{ app()->getLocale() == 'en' ? 'font-bold bg-gray-50' : '' }}">EN</a>
+                        <a href="{{ route('set_locale', 'id') }}"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {{ app()->getLocale() == 'id' ? 'font-bold bg-gray-50' : '' }}">ID</a>
+                        <a href="{{ route('set_locale', 'ja') }}"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {{ app()->getLocale() == 'ja' ? 'font-bold bg-gray-50' : '' }}">JP</a>
+                    </div>
                 </div>
             </div>
             @auth
