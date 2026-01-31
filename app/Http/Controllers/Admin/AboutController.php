@@ -74,29 +74,11 @@ class AboutController extends Controller
         }
 
         // Auto-translation Logic
+        // Removed as per user request to use file-based translation only
         try {
-            $tr = new \Stichoza\GoogleTranslate\GoogleTranslate();
-            $tr->setSource('en');
-
-            // Translate to Indonesian
-            $tr->setTarget('id');
-            $data['page_title_id'] = $tr->translate($request->page_title);
-            $data['title_id'] = $tr->translate($request->title);
-            $data['description_id'] = $tr->translate($request->description);
-            $data['hero_title_id'] = $tr->translate($request->hero_title);
-            $data['hero_description_id'] = $tr->translate($request->hero_description);
-
-            // Translate to Japanese
-            $tr->setTarget('ja');
-            $data['page_title_ja'] = $tr->translate($request->page_title);
-            $data['title_ja'] = $tr->translate($request->title);
-            $data['description_ja'] = $tr->translate($request->description);
-            $data['hero_title_ja'] = $tr->translate($request->hero_title);
-            $data['hero_description_ja'] = $tr->translate($request->hero_description);
-
+            // No auto-translation
         } catch (\Exception $e) {
-            // Log error or just continue with original/empty values if translation fails
-            // For now we just silently fail/continue to ensure data is saved at least in EN
+            // Silent fail
         }
 
         $about->update($data);

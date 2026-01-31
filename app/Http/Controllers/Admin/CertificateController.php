@@ -49,13 +49,21 @@ class CertificateController extends Controller
 
             // Translate to Indonesian
             $tr->setTarget('id');
-            $data['title_id'] = $tr->translate($request->title);
-            $data['issuer_id'] = $tr->translate($request->issuer);
+            if (empty($request->title_id) && $request->filled('title')) {
+                $data['title_id'] = $tr->translate($request->title);
+            }
+            if (empty($request->issuer_id) && $request->filled('issuer')) {
+                $data['issuer_id'] = $tr->translate($request->issuer);
+            }
 
             // Translate to Japanese
             $tr->setTarget('ja');
-            $data['title_ja'] = $tr->translate($request->title);
-            $data['issuer_ja'] = $tr->translate($request->issuer);
+            if (empty($request->title_ja) && $request->filled('title')) {
+                $data['title_ja'] = $tr->translate($request->title);
+            }
+            if (empty($request->issuer_ja) && $request->filled('issuer')) {
+                $data['issuer_ja'] = $tr->translate($request->issuer);
+            }
 
         } catch (\Exception $e) {
             // Silent fail
@@ -106,13 +114,21 @@ class CertificateController extends Controller
 
             // Translate to Indonesian
             $tr->setTarget('id');
-            $data['title_id'] = $tr->translate($request->title);
-            $data['issuer_id'] = $tr->translate($request->issuer);
+            if (empty($request->title_id) && $request->filled('title')) {
+                $data['title_id'] = $tr->translate($request->title);
+            }
+            if (empty($request->issuer_id) && $request->filled('issuer')) {
+                $data['issuer_id'] = $tr->translate($request->issuer);
+            }
 
             // Translate to Japanese
             $tr->setTarget('ja');
-            $data['title_ja'] = $tr->translate($request->title);
-            $data['issuer_ja'] = $tr->translate($request->issuer);
+            if (empty($request->title_ja) && $request->filled('title')) {
+                $data['title_ja'] = $tr->translate($request->title);
+            }
+            if (empty($request->issuer_ja) && $request->filled('issuer')) {
+                $data['issuer_ja'] = $tr->translate($request->issuer);
+            }
 
         } catch (\Exception $e) {
             // Silent fail

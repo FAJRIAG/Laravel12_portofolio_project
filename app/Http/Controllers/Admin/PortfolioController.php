@@ -49,13 +49,21 @@ class PortfolioController extends Controller
 
             // Translate to Indonesian
             $tr->setTarget('id');
-            $validated['title_id'] = $tr->translate($request->title);
-            $validated['description_id'] = $tr->translate($request->description);
+            if (empty($request->title_id) && $request->filled('title')) {
+                $validated['title_id'] = $tr->translate($request->title);
+            }
+            if (empty($request->description_id) && $request->filled('description')) {
+                $validated['description_id'] = $tr->translate($request->description);
+            }
 
             // Translate to Japanese
             $tr->setTarget('ja');
-            $validated['title_ja'] = $tr->translate($request->title);
-            $validated['description_ja'] = $tr->translate($request->description);
+            if (empty($request->title_ja) && $request->filled('title')) {
+                $validated['title_ja'] = $tr->translate($request->title);
+            }
+            if (empty($request->description_ja) && $request->filled('description')) {
+                $validated['description_ja'] = $tr->translate($request->description);
+            }
 
         } catch (\Exception $e) {
             // Silent fail
@@ -103,13 +111,21 @@ class PortfolioController extends Controller
 
             // Translate to Indonesian
             $tr->setTarget('id');
-            $validated['title_id'] = $tr->translate($request->title);
-            $validated['description_id'] = $tr->translate($request->description);
+            if (empty($request->title_id) && $request->filled('title')) {
+                $validated['title_id'] = $tr->translate($request->title);
+            }
+            if (empty($request->description_id) && $request->filled('description')) {
+                $validated['description_id'] = $tr->translate($request->description);
+            }
 
             // Translate to Japanese
             $tr->setTarget('ja');
-            $validated['title_ja'] = $tr->translate($request->title);
-            $validated['description_ja'] = $tr->translate($request->description);
+            if (empty($request->title_ja) && $request->filled('title')) {
+                $validated['title_ja'] = $tr->translate($request->title);
+            }
+            if (empty($request->description_ja) && $request->filled('description')) {
+                $validated['description_ja'] = $tr->translate($request->description);
+            }
 
         } catch (\Exception $e) {
             // Silent fail

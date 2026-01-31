@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $about ? $about->translate('page_title') : 'JriDev — Web Developer & Designer' }}</title>
+    <title>{{ $about ? __($about->page_title) : 'JriDev — Web Developer & Designer' }}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,7 +31,8 @@
 
     <header class="absolute top-0 left-0 right-0 z-50">
         <nav class="container mx-auto px-6 py-5 flex justify-between items-center">
-            <a href="/" class="text-xl font-bold text-white tracking-tight">{{ $about->logo_text ?? 'JriDev.' }}</a>
+            <a href="/"
+                class="text-xl font-bold text-white tracking-tight">{{ $about ? __($about->logo_text) : 'JriDev.' }}</a>
             <div class="hidden md:flex items-center space-x-10">
                 <a href="#portfolio"
                     class="text-sm font-medium text-slate-200 hover:text-white transition-colors">{{ __('Portfolio') }}</a>
@@ -90,11 +91,11 @@
 
             <div class="relative z-20 px-6">
                 <h1 class="font-serif text-5xl md:text-7xl font-bold text-white">
-                    {{ $about ? $about->translate('hero_title') : __('Crafting Digital Experiences.') }}
+                    {{ $about ? __($about->hero_title) : __('Crafting Digital Experiences.') }}
                 </h1>
 
                 <p class="mt-6 text-lg text-slate-300 max-w-2xl mx-auto">
-                    {{ $about ? $about->translate('hero_description') : __('I am a web developer focused on developing functional, intuitive, and clean design applications.') }}
+                    {{ $about ? __($about->hero_description) : __('I am a web developer focused on developing functional, intuitive, and clean design applications.') }}
                 </p>
                 <a href="#portfolio"
                     class="inline-block mt-8 px-8 py-3 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 transition-transform hover:scale-105 shadow-lg shadow-blue-500/20">
@@ -115,12 +116,12 @@
                             <div
                                 class="rounded-2xl overflow-hidden border border-slate-200 shadow-sm group-hover:shadow-xl transition-all duration-300">
                                 <img class="w-full h-56 object-cover" src="{{ asset('storage/' . $portfolio->image) }}"
-                                    alt="{{ $portfolio->translate('title') }}">
+                                    alt="{{ __($portfolio->title) }}">
                             </div>
                             <div class="p-4">
-                                <h3 class="font-bold text-lg text-slate-900">{{ $portfolio->translate('title') }}</h3>
+                                <h3 class="font-bold text-lg text-slate-900">{{ __($portfolio->title) }}</h3>
                                 <p class="text-slate-500 text-sm mt-1">
-                                    {{ Str::limit($portfolio->translate('description'), 80) }}
+                                    {{ Str::limit(__($portfolio->description), 80) }}
                                 </p>
                             </div>
                         </a>
@@ -140,19 +141,19 @@
                 <div class="flex flex-col md:flex-row items-center gap-12 mb-20">
                     <div class="w-full md:w-1/3">
                         @if($about && $about->image)
-                            <img src="{{ asset('storage/' . $about->image) }}" alt="Profile Picture"
+                            <img src="{{ asset('storage/' . $about->image) }}" alt="{{ __('Profile Picture') }}"
                                 class="w-48 h-48 mx-auto rounded-full object-cover shadow-xl border-4 border-white">
                         @else
-                            <img src="{{ asset('storage/images/profile.png') }}" alt="Profile Picture"
+                            <img src="{{ asset('storage/images/profile.png') }}" alt="{{ __('Profile Picture') }}"
                                 class="w-48 h-48 mx-auto rounded-full object-cover shadow-xl border-4 border-white">
                         @endif
                     </div>
                     <div class="w-full md:w-2/3 text-left">
                         <h3 class="font-serif text-2xl font-bold text-slate-900 mb-4">
-                            {{ $about ? $about->translate('title') : __('Hello, I\'m JriDev.') }}
+                            {{ $about ? __($about->title) : __('Hello, I\'m JriDev.') }}
                         </h3>
                         <div class="text-slate-600 leading-relaxed text-lg mb-6 whitespace-pre-line">
-                            {{ $about ? $about->translate('description') : __('Default description.') }}
+                            {{ $about ? __($about->description) : __('Default description.') }}
                         </div>
                     </div>
                 </div>
@@ -209,7 +210,7 @@
                         <div
                             class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow border border-slate-100">
                             @if($certificate->image)
-                                <img src="{{ $certificate->image }}" alt="{{ $certificate->translate('title') }}"
+                                <img src="{{ $certificate->image }}" alt="{{ __($certificate->title) }}"
                                     class="w-full h-40 object-cover rounded-lg mb-4 bg-slate-100">
                             @else
                                 <div
@@ -221,8 +222,8 @@
                                     </svg>
                                 </div>
                             @endif
-                            <h3 class="font-bold text-lg text-slate-900">{{ $certificate->translate('title') }}</h3>
-                            <p class="text-slate-500 text-sm">{{ $certificate->translate('issuer') }} &bull;
+                            <h3 class="font-bold text-lg text-slate-900">{{ __($certificate->title) }}</h3>
+                            <p class="text-slate-500 text-sm">{{ __($certificate->issuer) }} &bull;
                                 {{ $certificate->issued_at->format('M Y') }}
                             </p>
                             @if($certificate->credential_url)
@@ -268,7 +269,7 @@
             </div>
 
             <div class="mt-10 text-sm text-slate-500">
-                &copy; {{ date('Y') }} JriDev. All rights reserved.
+                &copy; {{ date('Y') }} JriDev. {{ __('All rights reserved.') }}
             </div>
         </div>
     </footer>
