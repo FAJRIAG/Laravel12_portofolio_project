@@ -37,7 +37,7 @@
                                         value="{{ old('hero_title', $about->hero_title) }}"
                                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                         placeholder="e.g., Crafting Digital Experiences.">
-                                    </div>
+                                </div>
                                 <div class="mb-4">
                                     <label for="hero_description"
                                         class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Hero
