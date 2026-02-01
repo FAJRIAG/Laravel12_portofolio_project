@@ -91,11 +91,11 @@
 
             <div class="relative z-20 px-6">
                 <h1 class="font-serif text-5xl md:text-7xl font-bold text-white">
-                    {{ $about ? __($about->hero_title) : __('Crafting Digital Experiences.') }}
+                    {{ $about ? __(trim($about->hero_title)) : __('Crafting Digital Experiences.') }}
                 </h1>
 
                 <p class="mt-6 text-lg text-slate-300 max-w-2xl mx-auto">
-                    {{ $about ? __($about->hero_description) : __('I am a web developer focused on developing functional, intuitive, and clean design applications.') }}
+                    {{ $about ? __(trim($about->hero_description)) : __('I am a web developer focused on developing functional, intuitive, and clean design applications.') }}
                 </p>
                 <a href="#portfolio"
                     class="inline-block mt-8 px-8 py-3 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 transition-transform hover:scale-105 shadow-lg shadow-blue-500/20">
