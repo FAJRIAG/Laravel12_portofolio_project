@@ -5,6 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $about ? __($about->page_title) : 'JriDev — Web Developer & Designer' }}</title>
+    <meta name="description"
+        content="{{ $about ? __($about->hero_description) : 'JriDev — Web Developer & Designer Portfolio' }}">
+    <meta name="keywords" content="web developer, portfolio, laravel, php, designer, fajriag, jridev">
+    <link rel="canonical" href="{{ config('app.url') }}">
+    <meta name="robots" content="index, follow">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
