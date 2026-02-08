@@ -17,6 +17,7 @@
         href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Satoshi:wght@400;500;700;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicon/devicon@latest/devicon.min.css" />
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
@@ -148,29 +149,39 @@
             </div>
         </section>
 
-        <section id="skills" class="bg-slate-50 py-20 md:py-28">
-            <div class="container mx-auto px-6">
+        <section id="skills" class="bg-slate-900 py-20 md:py-28 relative overflow-hidden">
+            <!-- Background Elements -->
+            <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
+                <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-blue-600 blur-3xl"></div>
+                <div class="absolute top-1/2 -right-24 w-64 h-64 rounded-full bg-purple-600 blur-3xl"></div>
+            </div>
+
+            <div class="container mx-auto px-6 relative z-10">
                 <div class="text-center mb-16">
-                    <h2 class="font-serif text-4xl font-bold text-slate-900">{{ __('Skills & Tools') }}</h2>
-                    <p class="mt-3 text-slate-500">{{ __('Technologies I use to build my products.') }}</p>
+                    <h2 class="font-serif text-4xl font-bold text-white">{{ __('Tech Toolbox') }}</h2>
+                    <p class="mt-3 text-slate-400">{{ __('The technologies and tools I use to bring ideas to life.') }}</p>
                 </div>
 
                 @forelse($skills as $category => $categorySkills)
-                    <div class="mb-12">
-                        <h3 class="text-2xl font-bold text-slate-800 mb-6 text-center md:text-left border-b pb-2 inline-block">{{ $category }}</h3>
-                        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                    <div class="mb-14 last:mb-0">
+                        <div class="flex items-center justify-center mb-8">
+                            <span class="h-px w-8 bg-slate-700"></span>
+                            <h3 class="mx-4 text-xl font-medium text-slate-300 uppercase tracking-wider">{{ $category }}</h3>
+                            <span class="h-px w-8 bg-slate-700"></span>
+                        </div>
+                        
+                        <div class="flex flex-wrap justify-center gap-6">
                             @foreach($categorySkills as $skill)
-                                <div class="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow text-center flex flex-col items-center justify-center h-full border border-slate-100">
-                                    @if($skill->icon)
-                                        <div class="text-4xl text-blue-600 mb-3">
-                                            <i class="{{ $skill->icon }}"></i>
-                                        </div>
-                                    @endif
-                                    <h4 class="font-semibold text-slate-900">{{ $skill->name }}</h4>
+                                <div class="group relative flex flex-col items-center justify-center p-6 bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700/50 hover:border-blue-500/50 hover:bg-slate-800 transition-all duration-300 w-32 h-32 md:w-40 md:h-40">
+                                    <div class="text-5xl md:text-6xl mb-3 transform group-hover:scale-110 transition-transform duration-300">
+                                        <i class="{{ $skill->icon }}"></i>
+                                    </div>
+                                    <span class="text-slate-300 font-medium text-sm text-center group-hover:text-white transition-colors">{{ $skill->name }}</span>
+                                    
                                     @if($skill->proficiency)
-                                        <div class="w-full bg-gray-200 rounded-full h-1.5 mt-3 dark:bg-gray-700">
-                                            <div class="bg-blue-600 h-1.5 rounded-full" style="width: {{ $skill->proficiency }}%"></div>
-                                        </div>
+                                    <div class="absolute bottom-0 left-0 w-full h-1 bg-slate-700/50 rounded-b-xl overflow-hidden">
+                                        <div class="h-full bg-gradient-to-r from-blue-500 to-purple-500" style="width: {{ $skill->proficiency }}%"></div>
+                                    </div>
                                     @endif
                                 </div>
                             @endforeach
