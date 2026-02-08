@@ -10,7 +10,8 @@ Route::get('/', function () {
     $portfolios = Portfolio::latest()->get();
     $certificates = \App\Models\Certificate::latest('issued_at')->get();
     $about = \App\Models\About::first();
-    return view('welcome', compact('portfolios', 'certificates', 'about'));
+    $skills = \App\Models\Skill::orderBy('order')->orderBy('name')->get()->groupBy('category');
+    return view('welcome', compact('portfolios', 'certificates', 'about', 'skills'));
 });
 
 // Route for changing language
@@ -36,6 +37,9 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     // Rute untuk About Me (singleton)
     Route::get('about', [\App\Http\Controllers\Admin\AboutController::class, 'index'])->name('about.index');
     Route::put('about', [\App\Http\Controllers\Admin\AboutController::class, 'update'])->name('about.update');
+
+    // Route for Skills
+    Route::resource('skills', \App\Http\Controllers\Admin\SkillController::class);
 });
 
 require __DIR__ . '/auth.php';

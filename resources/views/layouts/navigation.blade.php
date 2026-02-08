@@ -20,6 +20,10 @@
                         :active="request()->routeIs('admin.certificates.*')">
                         {{ __('Certificates') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.skills.index')"
+                        :active="request()->routeIs('admin.skills.*')">
+                        {{ __('Skills') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -118,6 +122,10 @@
             <x-responsive-nav-link :href="route('admin.certificates.index')"
                 :active="request()->routeIs('admin.certificates.*')">
                 {{ __('Certificates') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.skills.index')"
+                :active="request()->routeIs('admin.skills.*')">
+                {{ __('Skills') }}
             </x-responsive-nav-link>
         </div>
 

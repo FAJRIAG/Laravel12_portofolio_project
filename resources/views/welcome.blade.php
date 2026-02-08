@@ -16,6 +16,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Satoshi:wght@400;500;700;900&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
@@ -41,6 +42,8 @@
             <div class="hidden md:flex items-center space-x-10">
                 <a href="#portfolio"
                     class="text-sm font-medium text-slate-200 hover:text-white transition-colors">{{ __('Portfolio') }}</a>
+                <a href="#skills"
+                    class="text-sm font-medium text-slate-200 hover:text-white transition-colors">{{ __('Skills') }}</a>
                 <a href="#about"
                     class="text-sm font-medium text-slate-200 hover:text-white transition-colors">{{ __('About Me') }}</a>
                 <a href="#contact"
@@ -142,6 +145,40 @@
                         <p class="col-span-full text-center text-slate-500">{{ __('No projects to display yet.') }}</p>
                     @endforelse
                 </div>
+            </div>
+        </section>
+
+        <section id="skills" class="bg-slate-50 py-20 md:py-28">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="font-serif text-4xl font-bold text-slate-900">{{ __('Skills & Tools') }}</h2>
+                    <p class="mt-3 text-slate-500">{{ __('Technologies I use to build my products.') }}</p>
+                </div>
+
+                @forelse($skills as $category => $categorySkills)
+                    <div class="mb-12">
+                        <h3 class="text-2xl font-bold text-slate-800 mb-6 text-center md:text-left border-b pb-2 inline-block">{{ $category }}</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                            @foreach($categorySkills as $skill)
+                                <div class="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow text-center flex flex-col items-center justify-center h-full border border-slate-100">
+                                    @if($skill->icon)
+                                        <div class="text-4xl text-blue-600 mb-3">
+                                            <i class="{{ $skill->icon }}"></i>
+                                        </div>
+                                    @endif
+                                    <h4 class="font-semibold text-slate-900">{{ $skill->name }}</h4>
+                                    @if($skill->proficiency)
+                                        <div class="w-full bg-gray-200 rounded-full h-1.5 mt-3 dark:bg-gray-700">
+                                            <div class="bg-blue-600 h-1.5 rounded-full" style="width: {{ $skill->proficiency }}%"></div>
+                                        </div>
+                                    @endif
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @empty
+                     <p class="col-span-full text-center text-slate-500">{{ __('No skills added yet.') }}</p>
+                @endforelse
             </div>
         </section>
 
