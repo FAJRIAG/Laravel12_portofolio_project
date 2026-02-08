@@ -111,6 +111,29 @@
                             </div>
                         </div>
 
+                        <!-- CV Section -->
+                        <div class="mt-6 p-4 bg-white dark:bg-gray-800 border-t">
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Curriculum Vitae (CV)
+                            </h3>
+                            <div class="mb-4">
+                                @if($about->cv_path)
+                                    <div class="mb-2">
+                                        <p class="text-sm text-gray-600 mb-1">Current CV:</p>
+                                        <a href="{{ asset('storage/' . $about->cv_path) }}" target="_blank"
+                                            class="text-blue-500 hover:text-blue-700 underline">View Current CV</a>
+                                    </div>
+                                @endif
+                                <label for="cv"
+                                    class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Upload New CV
+                                    (PDF)</label>
+                                <input type="file" name="cv" id="cv" accept="application/pdf"
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                @error('cv')
+                                    <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="flex items-center justify-between mt-6">
                             <button type="submit"
                                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">

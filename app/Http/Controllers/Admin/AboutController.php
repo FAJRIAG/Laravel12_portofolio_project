@@ -42,6 +42,7 @@ class AboutController extends Controller
             'hero_description_ja' => 'nullable|string',
             'logo_text' => 'nullable|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'cv' => 'nullable|file|mimes:pdf|max:2048',
         ]);
 
         $about = About::first();
@@ -71,6 +72,14 @@ class AboutController extends Controller
                 Storage::disk('public')->delete($about->image);
             }
             $data['image'] = $request->file('image')->store('images', 'public');
+        }
+
+        if ($request->hasFile('cv')) {
+            // Hapus CV lama jika ada
+            if ($about->cv_path && Storage::disk('public')->exists($about->cv_path)) {
+                Storage::disk('public')->delete($about->cv_path);
+            }
+            $data['cv_path'] = $request->file('cv')->store('cvs', 'public');
         }
 
         // Auto-translation Logic

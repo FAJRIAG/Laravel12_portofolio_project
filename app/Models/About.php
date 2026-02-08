@@ -27,5 +27,6 @@ class About extends Model
         'hero_description_id',
         'hero_description_ja',
         'logo_text',
+        'cv_path',
     ];
 }

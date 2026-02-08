@@ -102,10 +102,18 @@
                 <p class="mt-6 text-lg text-slate-300 max-w-2xl mx-auto">
                     {{ $about ? __(trim($about->hero_description)) : __('I am a web developer focused on developing functional, intuitive, and clean design applications.') }}
                 </p>
-                <a href="#portfolio"
-                    class="inline-block mt-8 px-8 py-3 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 transition-transform hover:scale-105 shadow-lg shadow-blue-500/20">
-                    {{ __('View My Work') }}
-                </a>
+                <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#portfolio"
+                        class="px-8 py-3 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 transition-transform hover:scale-105 shadow-lg shadow-blue-500/20">
+                        {{ __('View My Work') }}
+                    </a>
+                    @if($about && $about->cv_path)
+                        <a href="{{ asset('storage/' . $about->cv_path) }}" target="_blank"
+                            class="px-8 py-3 bg-transparent border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-slate-900 transition-all hover:scale-105">
+                            {{ __('Download CV') }}
+                        </a>
+                    @endif
+                </div>
             </div>
         </section>
 
