@@ -3,7 +3,7 @@
         'name' => 'fajriag/portfolio',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '022d5854d32ff19999487c05f55decbc8c0f4a66',
+        'reference' => '11364ad332f4598556398d3c5eac8508a5433f9c',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -88,7 +88,7 @@
         'fajriag/portfolio' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '022d5854d32ff19999487c05f55decbc8c0f4a66',
+            'reference' => '11364ad332f4598556398d3c5eac8508a5433f9c',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -390,6 +390,24 @@
             'replaced' => array(
                 0 => 'v12.49.0',
             ),
+        ),
+        'intervention/gif' => array(
+            'pretty_version' => '4.2.4',
+            'version' => '4.2.4.0',
+            'reference' => 'c3598a16ebe7690cd55640c44144a9df383ea73c',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../intervention/gif',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'intervention/image' => array(
+            'pretty_version' => '3.11.6',
+            'version' => '3.11.6.0',
+            'reference' => '5f6d27d9fd56312c47f347929e7ac15345c605a1',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../intervention/image',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'kodova/hamcrest-php' => array(
             'dev_requirement' => true,

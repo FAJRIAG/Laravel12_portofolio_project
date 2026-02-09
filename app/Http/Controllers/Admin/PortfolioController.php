@@ -1,14 +1,16 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Portfolio;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage; // Import Storage
+use Illuminate\Support\Facades\Storage;
+use App\Traits\ImageCompressionTrait;
 
 class PortfolioController extends Controller
 {
+    use ImageCompressionTrait;
+
     // Menampilkan daftar portofolio
     public function index()
     {
@@ -27,7 +29,7 @@ class PortfolioController extends Controller
     {
         // Validasi form
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
+            'portfolio_title' => 'required|string|max:255', // Renamed to avoid conflict
             'title_id' => 'nullable|string|max:255',
             'title_ja' => 'nullable|string|max:255',
             'description' => 'required|string',
@@ -37,9 +39,12 @@ class PortfolioController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        // Upload gambar dan dapatkan path
+        $validated['title'] = $request->portfolio_title; // Map to title
+        unset($validated['portfolio_title']);
+
+        // Upload gambar dengan kompresi
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('portfolio_images', 'public');
+            $validated['image'] = $this->compressAndStore($request->file('image'), 'portfolio_images');
         }
 
         // Auto-translation Logic
@@ -49,8 +54,8 @@ class PortfolioController extends Controller
 
             // Translate to Indonesian
             $tr->setTarget('id');
-            if (empty($request->title_id) && $request->filled('title')) {
-                $validated['title_id'] = $tr->translate($request->title);
+            if (empty($request->title_id) && $request->filled('portfolio_title')) {
+                $validated['title_id'] = $tr->translate($request->portfolio_title);
             }
             if (empty($request->description_id) && $request->filled('description')) {
                 $validated['description_id'] = $tr->translate($request->description);
@@ -58,8 +63,8 @@ class PortfolioController extends Controller
 
             // Translate to Japanese
             $tr->setTarget('ja');
-            if (empty($request->title_ja) && $request->filled('title')) {
-                $validated['title_ja'] = $tr->translate($request->title);
+            if (empty($request->title_ja) && $request->filled('portfolio_title')) {
+                $validated['title_ja'] = $tr->translate($request->portfolio_title);
             }
             if (empty($request->description_ja) && $request->filled('description')) {
                 $validated['description_ja'] = $tr->translate($request->description);
@@ -84,7 +89,7 @@ class PortfolioController extends Controller
     public function update(Request $request, Portfolio $portfolio)
     {
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
+            'portfolio_title' => 'required|string|max:255', // Renamed to avoid conflict
             'title_id' => 'nullable|string|max:255',
             'title_ja' => 'nullable|string|max:255',
             'description' => 'required|string',
@@ -94,14 +99,17 @@ class PortfolioController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
+        $validated['title'] = $request->portfolio_title; // Map to title
+        unset($validated['portfolio_title']);
+
         // Cek jika ada gambar baru yang di-upload
         if ($request->hasFile('image')) {
             // Hapus gambar lama
             if ($portfolio->image) {
                 Storage::disk('public')->delete($portfolio->image);
             }
-            // Upload gambar baru
-            $validated['image'] = $request->file('image')->store('portfolio_images', 'public');
+            // Upload gambar baru dengan kompresi
+            $validated['image'] = $this->compressAndStore($request->file('image'), 'portfolio_images');
         }
 
         // Auto-translation Logic
@@ -111,8 +119,8 @@ class PortfolioController extends Controller
 
             // Translate to Indonesian
             $tr->setTarget('id');
-            if (empty($request->title_id) && $request->filled('title')) {
-                $validated['title_id'] = $tr->translate($request->title);
+            if (empty($request->title_id) && $request->filled('portfolio_title')) {
+                $validated['title_id'] = $tr->translate($request->portfolio_title);
             }
             if (empty($request->description_id) && $request->filled('description')) {
                 $validated['description_id'] = $tr->translate($request->description);
@@ -120,8 +128,8 @@ class PortfolioController extends Controller
 
             // Translate to Japanese
             $tr->setTarget('ja');
-            if (empty($request->title_ja) && $request->filled('title')) {
-                $validated['title_ja'] = $tr->translate($request->title);
+            if (empty($request->title_ja) && $request->filled('portfolio_title')) {
+                $validated['title_ja'] = $tr->translate($request->portfolio_title);
             }
             if (empty($request->description_ja) && $request->filled('description')) {
                 $validated['description_ja'] = $tr->translate($request->description);

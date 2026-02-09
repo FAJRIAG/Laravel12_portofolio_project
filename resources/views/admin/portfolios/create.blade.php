@@ -25,10 +25,11 @@
                         <!-- English Content (Default) -->
                         <div class="space-y-4">
                             <div class="mb-4">
-                                <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Ref:</label>
-                                <input type="text" name="title" id="title"
+                                <label for="portfolio_title"
+                                    class="block text-gray-700 text-sm font-bold mb-2">Title:</label>
+                                <input type="text" name="portfolio_title" id="portfolio_title"
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    value="{{ old('title') }}" required>
+                                    value="{{ old('portfolio_title') }}">
                             </div>
                             <div class="mb-4">
                                 <label for="description"

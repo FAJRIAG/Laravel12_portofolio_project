@@ -11,22 +11,32 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <form action="{{ route('admin.certificates.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @if ($errors->any())
+                            <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                                role="alert">
+                                <strong class="font-bold">Whoops!</strong>
+                                <span class="block sm:inline">There were some problems with your input.</span>
+                                <ul class="mt-2 list-disc list-inside">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
 
                         <!-- English Content (Default) -->
                         <div class="space-y-4">
                             <div class="mb-4">
-                                <label for="title"
+                                <label for="cert_title"
                                     class="block text-sm font-medium text-gray-700 dark:text-gray-300">Title</label>
-                                <input type="text" name="title" id="title" value="{{ old('title') }}"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    required>
+                                <input type="text" name="cert_title" id="cert_title" value="{{ old('cert_title') }}"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             </div>
                             <div class="mb-4">
                                 <label for="issuer"
                                     class="block text-sm font-medium text-gray-700 dark:text-gray-300">Issuer</label>
                                 <input type="text" name="issuer" id="issuer" value="{{ old('issuer') }}"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    required>
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             </div>
                         </div>
 
@@ -37,8 +47,7 @@
                                     class="block text-sm font-medium text-gray-700 dark:text-gray-300">Issued
                                     Date</label>
                                 <input type="date" name="issued_at" id="issued_at" value="{{ old('issued_at') }}"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    required>
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 @error('issued_at')
                                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                 @enderror

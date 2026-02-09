@@ -45,5 +45,9 @@
     "Membangun sistem cerdas berbasis data, machine learning, dan engineering teknologi untuk menyelesaikan permasalahan nyata secara terukur dan skalabel.": "Membangun sistem cerdas berbasis data, pembelajaran mesin, dan teknologi rekayasa untuk menyelesaikan permasalahan nyata secara terukur dan berskalabel.",
     "Halo, saya Fajri Abdurahman Ghurri": "Halo, saya Fajri Abdurahman Ghurri",
     "Saya adalah AI Engineer dengan fokus pada Engineering Technology, menggabungkan machine learning, computer vision, data-driven system, dan software engineering untuk membangun solusi cerdas yang aplikatif dan siap digunakan di dunia nyata.\r\n\r\nSaya memiliki pengalaman dalam merancang pipeline data, melakukan training dan evaluasi model AI, serta mengintegrasikan model ke dalam aplikasi mobile dan web menggunakan pendekatan end-to-end engineering. Fokus utama saya adalah memastikan model tidak hanya akurat, tetapi efisien, dapat diskalakan, dan mudah di-deploy.": "Saya adalah AI Engineer dengan fokus pada Teknologi Rekayasa, menggabungkan pembelajaran mesin, visi komputer, sistem berbasis data, dan rekayasa perangkat lunak untuk membangun solusi cerdas yang aplikatif dan siap digunakan di dunia nyata.\n\nSaya memiliki pengalaman dalam merancang pipeline data, melakukan pelatihan dan evaluasi model AI, serta mengintegrasikan model ke dalam aplikasi seluler dan web menggunakan pendekatan teknik end-to-end. Fokus utama saya adalah memastikan model tidak hanya akurat, efisien tetapi, dapat diskalakan, dan mudah di-deploy.",
-    "Download CV": "Unduh CV"
+    "Download CV": "Unduh CV",
+    "Skills": "Keahlian",
+    "Manage Skills": "Kelola Keahlian",
+    "Add New Skill": "Tambah Keahlian Baru",
+    "Edit Skill": "Edit Keahlian"
 }

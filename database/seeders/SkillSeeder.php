@@ -13,13 +13,13 @@ class SkillSeeder extends Seeder
     public function run(): void
     {
         // Truncate existing skills to start fresh
-        // \App\Models\Skill::truncate(); // Optional: uncomment if you want to clear skills first
+        // \App\Models\Skill::truncate(); 
 
         $skills = [
             // Languages
             [
                 'name' => 'Python',
-                'category' => 'Languages', // Changed from singular "Language" to match user's potential grouping or keep as "Language" for consistency. Let's use "Languages" for multiple.
+                'category' => 'Languages',
                 'proficiency' => 90,
                 'icon' => 'devicon-python-plain colored',
                 'order' => 1,
@@ -46,133 +46,120 @@ class SkillSeeder extends Seeder
                 'order' => 4,
             ],
 
-            // AI/ML
+            // Frameworks & Libraries (combining AI/ML + Web/Mobile for simpler categories if desired, but sticking to detailed categories is safer)
             [
                 'name' => 'PyTorch',
-                'category' => 'AI / Machine Learning',
+                'category' => 'Frameworks & Libraries',
                 'proficiency' => 75,
                 'icon' => 'devicon-pytorch-original colored',
                 'order' => 5,
             ],
             [
                 'name' => 'TensorFlow',
-                'category' => 'AI / Machine Learning',
+                'category' => 'Frameworks & Libraries',
                 'proficiency' => 70,
                 'icon' => 'devicon-tensorflow-original colored',
                 'order' => 6,
             ],
             [
                 'name' => 'Scikit-learn',
-                'category' => 'AI / Machine Learning',
+                'category' => 'Frameworks & Libraries',
                 'proficiency' => 75,
-                'icon' => 'devicon-scikitlearn-plain colored', // Check if exists, fallback?
+                'icon' => 'devicon-scikitlearn-plain colored',
                 'order' => 7,
             ],
             [
-                'name' => 'Lightning',
-                'category' => 'AI / Machine Learning',
-                'proficiency' => 70,
-                'icon' => 'fas fa-bolt text-yellow-500', // Fallback for Lightning AI
-                'order' => 8,
-            ],
-
-            // Web/Mobile
-            [
                 'name' => 'Laravel',
-                'category' => 'Web & Mobile Development',
+                'category' => 'Frameworks & Libraries',
                 'proficiency' => 90,
                 'icon' => 'devicon-laravel-original colored',
-                'order' => 9,
+                'order' => 8,
             ],
             [
                 'name' => 'Flutter',
-                'category' => 'Web & Mobile Development',
+                'category' => 'Frameworks & Libraries',
                 'proficiency' => 85,
                 'icon' => 'devicon-flutter-plain colored',
-                'order' => 10,
+                'order' => 9,
             ],
             [
                 'name' => 'Node.js',
-                'category' => 'Web & Mobile Development',
+                'category' => 'Frameworks & Libraries',
                 'proficiency' => 75,
                 'icon' => 'devicon-nodejs-plain-wordmark colored',
-                'order' => 11,
+                'order' => 10,
             ],
 
-            // Database
+            // Tools & Platforms
             [
                 'name' => 'PostgreSQL',
-                'category' => 'Database',
+                'category' => 'Tools & Platforms',
                 'proficiency' => 80,
                 'icon' => 'devicon-postgresql-plain colored',
-                'order' => 12,
+                'order' => 11,
             ],
             [
                 'name' => 'Redis',
-                'category' => 'Database',
+                'category' => 'Tools & Platforms',
                 'proficiency' => 70,
                 'icon' => 'devicon-redis-plain colored',
-                'order' => 13,
+                'order' => 12,
             ],
             [
                 'name' => 'MySQL',
-                'category' => 'Database',
+                'category' => 'Tools & Platforms',
                 'proficiency' => 85,
                 'icon' => 'devicon-mysql-plain colored',
-                'order' => 14,
+                'order' => 13,
             ],
             [
                 'name' => 'Firebase',
-                'category' => 'Database',
+                'category' => 'Tools & Platforms',
                 'proficiency' => 75,
                 'icon' => 'devicon-firebase-plain colored',
-                'order' => 15,
+                'order' => 14,
             ],
-
-            // Hardware/IoT
             [
                 'name' => 'Arduino',
-                'category' => 'Hardware & IoT',
+                'category' => 'Tools & Platforms',
                 'proficiency' => 60,
                 'icon' => 'devicon-arduino-plain colored',
-                'order' => 16,
+                'order' => 15,
             ],
             [
                 'name' => 'Raspberry Pi',
-                'category' => 'Hardware & IoT',
+                'category' => 'Tools & Platforms',
                 'proficiency' => 65,
                 'icon' => 'devicon-raspberrypi-line colored',
-                'order' => 17,
+                'order' => 16,
             ],
-
-            // Tools/DevOps
             [
                 'name' => 'Linux',
-                'category' => 'Tools & DevOps',
+                'category' => 'Tools & Platforms',
                 'proficiency' => 80,
                 'icon' => 'devicon-linux-plain colored',
-                'order' => 18,
+                'order' => 17,
             ],
             [
                 'name' => 'Git',
-                'category' => 'Tools & DevOps',
+                'category' => 'Tools & Platforms',
                 'proficiency' => 90,
                 'icon' => 'devicon-git-plain colored',
-                'order' => 19,
+                'order' => 18,
             ],
             [
                 'name' => 'GitHub',
-                'category' => 'Tools & DevOps',
+                'category' => 'Tools & Platforms',
                 'proficiency' => 90,
                 'icon' => 'devicon-github-original colored',
-                'order' => 20,
+                'order' => 19,
             ],
             [
                 'name' => 'VS Code',
-                'category' => 'Tools & DevOps',
+                'category' => 'Tools & Platforms',
                 'proficiency' => 95,
                 'icon' => 'devicon-vscode-plain colored',
-                'order' => 21,
+                'order' => 20,
             ],
         ];
 

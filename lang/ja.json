@@ -47,5 +47,9 @@
     "Halo, saya Fajri Abdurahman Ghurri": "こんにちは、ファジリ・アブドゥラフマン・グリです",
     "Saya adalah AI Engineer dengan fokus pada Engineering Technology, menggabungkan machine learning, computer vision, data-driven system, dan software engineering untuk membangun solusi cerdas yang aplikatif dan siap digunakan di dunia nyata.\r\n\r\nSaya memiliki pengalaman dalam merancang pipeline data, melakukan training dan evaluasi model AI, serta mengintegrasikan model ke dalam aplikasi mobile dan web menggunakan pendekatan end-to-end engineering. Fokus utama saya adalah memastikan model tidak hanya akurat, tetapi efisien, dapat diskalakan, dan mudah di-deploy.": "私はエンジニアリングテクノロジーに重点を置くAIエンジニアであり、機械学習、コンピュータビジョン、データ駆動型システム、ソフトウェアエンジニアリングを組み合わせて、実社会ですぐに使用できるインテリジェントなソリューションを構築しています。\n\nデータパイプラインの設計、AIモデルのトレーニングと評価、およびエンドツーエンドのエンジニアリングアプローチを使用したモバイルおよびWebアプリケーションへのモデルの統合における経験があります。私の主な焦点は、モデルが正確であるだけでなく、効率的でスケーラブルで、展開しやすいことを保証することです。",
     "Saya adalah AI Engineer dengan fokus pada Engineering Technology, menggabungkan machine learning, computer vision, data-driven system, dan software engineering untuk membangun solusi cerdas yang aplikatif dan siap digunakan di dunia nyata.\n\nSaya memiliki pengalaman dalam merancang pipeline data, melakukan training dan evaluasi model AI, serta mengintegrasikan model ke dalam aplikasi mobile dan web menggunakan pendekatan end-to-end engineering. Fokus utama saya adalah memastikan model tidak hanya akurat, tetapi efisien, dapat diskalakan, dan mudah di-deploy.": "私はエンジニアリングテクノロジーに重点を置くAIエンジニアであり、機械学習、コンピュータビジョン、データ駆動型システム、ソフトウェアエンジニアリングを組み合わせて、実社会ですぐに使用できるインテリジェントなソリューションを構築しています。\n\nデータパイプラインの設計、AIモデルのトレーニングと評価、およびエンドツーエンドのエンジニアリングアプローチを使用したモバイルおよびWebアプリケーションへのモデルの統合における経験があります。私の主な焦点は、モデルが正確であるだけでなく、効率的でスケーラブルで、展開しやすいことを保証することです。",
-    "Download CV": "履歴書をダウンロード"
+    "Download CV": "履歴書をダウンロード",
+    "Skills": "スキル",
+    "Manage Skills": "スキル管理",
+    "Add New Skill": "新しいスキルを追加",
+    "Edit Skill": "スキルを編集"
 }

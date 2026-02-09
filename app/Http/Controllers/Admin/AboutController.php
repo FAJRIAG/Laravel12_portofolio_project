@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\About;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Traits\ImageCompressionTrait;
 
 class AboutController extends Controller
 {
+    use ImageCompressionTrait;
+
     public function index()
     {
         $about = About::first();
@@ -25,7 +28,7 @@ class AboutController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
+            'about_title' => 'required|string|max:255', // Renamed from title
             'title_id' => 'nullable|string|max:255',
             'title_ja' => 'nullable|string|max:255',
             'description' => 'required|string',
@@ -51,7 +54,7 @@ class AboutController extends Controller
             'page_title' => $request->page_title,
             'page_title_id' => $request->page_title_id,
             'page_title_ja' => $request->page_title_ja,
-            'title' => $request->title,
+            'title' => $request->about_title, // Map about_title to title
             'title_id' => $request->title_id,
             'title_ja' => $request->title_ja,
             'description' => $request->description,
@@ -71,7 +74,7 @@ class AboutController extends Controller
             if ($about->image && Storage::disk('public')->exists($about->image)) {
                 Storage::disk('public')->delete($about->image);
             }
-            $data['image'] = $request->file('image')->store('images', 'public');
+            $data['image'] = $this->compressAndStore($request->file('image'), 'images');
         }
 
         if ($request->hasFile('cv')) {

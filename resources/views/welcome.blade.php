@@ -16,7 +16,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Satoshi:wght@400;500;700;900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicon/devicon@latest/devicon.min.css" />
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -149,47 +151,53 @@
             </div>
         </section>
 
-        <section id="skills" class="bg-slate-900 py-20 md:py-28 relative overflow-hidden">
+        <section id="skills" class="bg-white py-20 md:py-28 relative overflow-hidden font-mono">
             <!-- Background Elements -->
             <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
-                <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-blue-600 blur-3xl"></div>
-                <div class="absolute top-1/2 -right-24 w-64 h-64 rounded-full bg-purple-600 blur-3xl"></div>
+                <div class="absolute top-10 left-10 w-72 h-72 rounded-full bg-blue-200/40 blur-3xl">
+                </div>
+                <div
+                    class="absolute bottom-10 right-10 w-96 h-96 rounded-full bg-purple-200/40 blur-3xl">
+                </div>
             </div>
 
             <div class="container mx-auto px-6 relative z-10">
                 <div class="text-center mb-16">
-                    <h2 class="font-serif text-4xl font-bold text-white">{{ __('Tech Toolbox') }}</h2>
-                    <p class="mt-3 text-slate-400">{{ __('The technologies and tools I use to bring ideas to life.') }}</p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-black mb-2">
+                        <span class="text-zinc-600">&lt;</span>TechToolbox<span class="text-zinc-600">/&gt;</span>
+                    </h2>
+                    <p class="mt-3 text-gray-600 max-w-xl mx-auto text-sm md:text-base">
+                        <span class="text-purple-600">const</span> <span class="text-blue-600">stack</span> = <span
+                            class="text-gray-700">['Languages', 'Frameworks', 'Tools']</span>;
+                    </p>
                 </div>
 
-                @forelse($skills as $category => $categorySkills)
-                    <div class="mb-14 last:mb-0">
-                        <div class="flex items-center justify-center mb-8">
-                            <span class="h-px w-8 bg-slate-700"></span>
-                            <h3 class="mx-4 text-xl font-medium text-slate-300 uppercase tracking-wider">{{ $category }}</h3>
-                            <span class="h-px w-8 bg-slate-700"></span>
-                        </div>
-                        
-                        <div class="flex flex-wrap justify-center gap-6">
-                            @foreach($categorySkills as $skill)
-                                <div class="group relative flex flex-col items-center justify-center p-6 bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700/50 hover:border-blue-500/50 hover:bg-slate-800 transition-all duration-300 w-32 h-32 md:w-40 md:h-40">
-                                    <div class="text-5xl md:text-6xl mb-3 transform group-hover:scale-110 transition-transform duration-300">
-                                        <i class="{{ $skill->icon }}"></i>
-                                    </div>
-                                    <span class="text-slate-300 font-medium text-sm text-center group-hover:text-white transition-colors">{{ $skill->name }}</span>
-                                    
-                                    @if($skill->proficiency)
-                                    <div class="absolute bottom-0 left-0 w-full h-1 bg-slate-700/50 rounded-b-xl overflow-hidden">
-                                        <div class="h-full bg-gradient-to-r from-blue-500 to-purple-500" style="width: {{ $skill->proficiency }}%"></div>
-                                    </div>
-                                    @endif
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+                    @forelse($skills as $category => $categorySkills)
+                        <div
+                            class="bg-white backdrop-blur-sm border border-gray-200 rounded-2xl p-8 hover:border-gray-300 hover:bg-gray-50 transition-all duration-300 shadow-md hover:shadow-lg">
+                            <!-- Category Header -->
+                            <div class="mb-6 pb-4 border-b border-gray-200">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-gray-400 text-base font-mono">//</span>
+                                    <h3 class="text-xl font-bold text-gray-900">{{ $category }}</h3>
                                 </div>
-                            @endforeach
+                            </div>
+
+                            <!-- Skills Pills -->
+                            <div class="flex flex-wrap gap-2.5">
+                                @foreach($categorySkills as $skill)
+                                    <span
+                                        class="px-5 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 hover:text-gray-900 rounded-full text-sm font-medium transition-all duration-200 border border-gray-200 hover:border-gray-300 hover:shadow-sm cursor-default">
+                                        {{ $skill->name }}
+                                    </span>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
-                @empty
-                     <p class="col-span-full text-center text-slate-500">{{ __('No skills added yet.') }}</p>
-                @endforelse
+                    @empty
+                        <p class="col-span-full text-center text-zinc-500">{{ __('No skills added yet.') }}</p>
+                    @endforelse
+                </div>
             </div>
         </section>
 
