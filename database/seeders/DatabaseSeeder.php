@@ -29,6 +29,8 @@ class DatabaseSeeder extends Seeder
         // Memanggil seeder lain untuk mengisi data portofolio
         $this->call([
             PortfolioSeeder::class,
+            CertificateSeeder::class,
+            SkillSeeder::class,
         ]);
     }
 }
